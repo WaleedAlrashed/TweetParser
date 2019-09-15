@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">TweetParser</string>
+    <string name="user_name">Username</string>
+    <string name="password">Password</string>
+    <string name="main_title">Twitter: Login</string>
+    <string name="user_list_title">Users List</string>
+    <string name="tweet_button">tweet</string>
+    <string name="your_feed">Your Feed</string>
+    <string name="Logout_button">Logout</string>
+    <string name="about_button">About</string>
+    <string name="feedback_button">Feedback</string>
+    <string name="username_field_hint">Type your your username here</string>
+    <string name="signup_button">Signup/Login</string>
+    <string name="title_activity_about">About</string>
+    <string name="about_content">
+        TweetParser
+        Speak your mind !
+        A simple application yet powerful tool for people to express their ideas
+        Created with Love in Damascus - Syria
+
+        Waleed Alrashed
+
+    </string>
+
+</resources>
