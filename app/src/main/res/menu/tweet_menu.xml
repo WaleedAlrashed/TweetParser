@@ -5,6 +5,6 @@
     <item android:title="@string/your_feed" android:id="@+id/viewFeed" />
     <item android:title="@string/Logout_button" android:id="@+id/logout" />
     <item android:title="@string/about_button" android:id="@+id/about" />
-    <item android:title="@string/feedback_button" android:id="@+id/feedback"/>
+
 
 </menu>

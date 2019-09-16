@@ -7,6 +7,7 @@
     <string name="tweet_button">tweet</string>
     <string name="your_feed">Your Feed</string>
     <string name="Logout_button">Logout</string>
+    <string name="Login_button">Login</string>
     <string name="about_button">About</string>
     <string name="feedback_button">Feedback</string>
     <string name="username_field_hint">Type your your username here</string>

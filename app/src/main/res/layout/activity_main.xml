@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@drawable/grad_bg"
+    >
+
+    <!--    some tags are for the new login-->
 
     <Button
         android:id="@+id/signUpButton"
@@ -13,6 +16,14 @@
         android:layout_marginTop="36dp"
         android:onClick="signupLogin"
         android:text="@string/signup_button"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#1da1f2"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

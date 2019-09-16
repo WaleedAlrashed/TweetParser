@@ -7,9 +7,11 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.parse.Parse;
+import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
 import androidx.appcompat.app.AlertDialog;
@@ -22,22 +24,64 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class AboutActivity extends AppCompatActivity {
 
     public TextView aboutEditText;
     public TextView versionTextView;
-
+    public final int APP_CURRENT_VERSION = BuildConfig.VERSION_CODE;
+    public  int SERVER_VERSION = 1;
     public void openWebsite(View view){
         String url = "https://waleedalrashed.wordpress.com/";
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
     }
 
     public void checkForUpdate(View view){
+       // ParseObject appVersion = new ParseObject("AppsVersions");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("AppsVersions");
+        query.whereEqualTo("objectId","BXieGFuTJu");
+        query.setLimit(2);
+       query.getFirstInBackground(new GetCallback<ParseObject>() {
+           @Override
+           public void done(ParseObject object, ParseException e) {
+                if(e == null){
+                    if(object != null){
+                        SERVER_VERSION = object.getInt("twitter");
+
+                    }
+                }else{
+                    Toast.makeText(AboutActivity.this,"Something Went Wrong!",Toast.LENGTH_SHORT).show();
+                }
+           }
+       });
+
+        Log.i("SERVER_VERSION:"," "+SERVER_VERSION);
+        Log.i("APP_VERSION: ","" +APP_CURRENT_VERSION);
+
+       if(appNeedsUpdate()){
+           Snackbar.make(view, "Update available",
+                   Snackbar.LENGTH_LONG)
+                   .setAction("Action", null).show();
+       }else{
+           Snackbar.make(view, "You're running the latest version!",
+                   Snackbar.LENGTH_LONG)
+                   .setAction("Action", null).show();
+       }
+
+
+
 
     }
+
+
+    public boolean appNeedsUpdate(){
+        return SERVER_VERSION > APP_CURRENT_VERSION ? true : false;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final String app_version = BuildConfig.VERSION_NAME;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -46,9 +90,9 @@ public class AboutActivity extends AppCompatActivity {
         //About edit text
         aboutEditText = findViewById(R.id.aboutEditText);
 
-        //app_version Text View
+        //APP_CURRENT_VERSION Text View
         versionTextView = findViewById(R.id.versionTextView);
-        versionTextView.setText("App Version: "+app_version);
+        versionTextView.setText("App Version: "+ APP_CURRENT_VERSION);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setImageResource(R.drawable.feedback);
@@ -69,7 +113,7 @@ public class AboutActivity extends AppCompatActivity {
                         feedback.put("feedback",feedbackEditText.getText().toString());
                         feedback.put("android_version",android.os.Build.VERSION.SDK_INT);
                         feedback.put("device_name",android.os.Build.MODEL);
-                        feedback.put("app_version",app_version);
+                        feedback.put("APP_CURRENT_VERSION", APP_CURRENT_VERSION);
 
 
                         feedback.saveEventually(new SaveCallback() {
