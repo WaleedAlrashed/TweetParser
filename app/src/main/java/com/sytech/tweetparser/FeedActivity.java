@@ -2,7 +2,9 @@ package com.sytech.tweetparser;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActionBar;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -25,6 +27,7 @@ public class FeedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
         setTitle("Tweets");
+
 
         listView = findViewById(R.id.listView);
 
